@@ -50,11 +50,11 @@ JOIN pokemon.types types
 ON p.primary_type = types.id;
 
 # What is Rufflet's secondary type?
-# Normal
+# Flying
 SELECT types.name
 FROM pokemon.pokemons p
 JOIN pokemon.types types
-ON p.primary_type = types.id
+ON p.secondary_type = types.id
 WHERE p.name = "Rufflet";
 
 # What are the names of the pokemon that belong to the trainer with trainerID 303?
