@@ -1,35 +1,66 @@
 # What are all the types of pokemon that a pokemon can have?
+# Normal
+# Water
+# Grass
+# Rock
+# Fire
+# Ground
+# Poison
+# Bug
+# Electric
+# Dragon
+# Steel
+# Dark
+# Fighting
+# Psychic
+# Ghost
+# Fairy
+# Ice
+# Flying
 SELECT name
 FROM pokemon.types;
 
 # What is the name of the pokemon with id 45?
+#Eevee
 SELECT name
 FROM pokemon.pokemons
 WHERE id = 45;
 
 # How many pokemon are there?
+#656
 SELECT count(*) as 'COUNT'
 FROM pokemon.pokemons;
 
 # How many types are there?
+#18
 SELECT count(*)
 FROM pokemon.types;
 
 # How many pokemon have a secondary type?
+# 316
 SELECT count(*)
 FROM pokemon.pokemons
 WHERE secondary_type IS NOT NULL;
 
 # What is each pokemon's primary type?
-SELECT name, primary_type
-FROM pokemon.pokemons;
+#
+SELECT p.name, types.name
+FROM pokemon.pokemons p
+JOIN pokemon.types types
+ON p.primary_type = types.id;
 
 # What is Rufflet's secondary type?
-SELECT secondary_type
-FROM pokemon.pokemons
-WHERE name = "Rufflet";
+# Normal
+SELECT types.name
+FROM pokemon.pokemons p
+JOIN pokemon.types types
+ON p.primary_type = types.id
+WHERE p.name = "Rufflet";
 
 # What are the names of the pokemon that belong to the trainer with trainerID 303?
+# Wailord	303
+# Vileplume	303
+
 SELECT p.name, pt.trainerID
 FROM pokemon.trainers t
        JOIN pokemon.pokemon_trainer pt
@@ -39,11 +70,31 @@ FROM pokemon.trainers t
 WHERE t.trainerID = 303;
 
 # How many pokemon have a secondary type Poison
+# 31
 SELECT count(*)
 FROM pokemon.pokemons
 WHERE secondary_type = 7;
 
 # What are all the primary types and how many pokemon have that type?
+# Normal	90
+# Water	95
+# Grass	59
+# Rock	38
+# Fire	38
+# Ground	29
+# Poison	27
+# Bug	61
+# Electric	35
+# Dragon	22
+# Steel	19
+# Dark	24
+# Fighting	25
+# Psychic	38
+# Ghost	19
+# Fairy	14
+# Ice	22
+# Flying	1
+
 SELECT types.name as "Name", count(*) as "Count"
 FROM pokemon.pokemons p
        JOIN pokemon.types types
@@ -57,6 +108,20 @@ WHERE pt.pokelevel >= 100
 GROUP BY pt.trainerID;
 
 # How many pokemon only belong to one trainer and no other?
+# Clawitzer	1
+# Barbaracle	1
+# Tynamo	1
+# Rufflet	1
+# Lugia	1
+# Binacle	1
+# Malamar	1
+# Zekrom	1
+# Reshiram	1
+# Happiny	1
+# Zweilous	1
+# Swirlix	1
+# Spewpa	1
+
 SELECT p.name as "NAME", count(trainerID) as "COUNT"
 FROM pokemon.pokemon_trainer pt
        JOIN pokemon.pokemons p
